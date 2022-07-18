@@ -11,16 +11,21 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo world
-  print_my_name:
+  build:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node.13.8.0
     steps:
-        - run: MY_NAME
-workflows:
-  welcome:
+      - checkout
+      - run:
+          name: "echo env var"
+          command: |
+            echo $MY_NAME
+welcome:
     jobs:
       - print_hello
       - print_world:
           requires:
             - print_hello
-      - print_my_name 
+      - test-env-vars:
+          jobs:
+            - build
