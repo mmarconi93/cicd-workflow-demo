@@ -1,4 +1,9 @@
 version: 2.1
+
+workflows:
+  test-env-vars:
+    jobs:
+      - build
 # See notes below.
 jobs:
   build:
@@ -10,7 +15,3 @@ jobs:
           name: "echo env var"
           command: |
             echo $MY_NAME
-workflows:
-  test-env-vars:
-    jobs:
-     - build
